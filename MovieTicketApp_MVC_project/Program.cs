@@ -1,8 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using MovieTicketApp_MVC_project.Data;
+using static System.Net.Mime.MediaTypeNames;
+using System;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+//db context configrations
+builder.Services.AddDbContext<AppDbContext>(options => options
+//.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
+.UseSqlServer("Data Source =.; Integrated Security = True; Connect Timeout = 30; Encrypt = False; Trust Server Certificate=True; Application Intent = ReadWrite; Multi Subnet Failover=False"));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,3 +33,5 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+//seed
+AppDbInitializer.Seed(app);
