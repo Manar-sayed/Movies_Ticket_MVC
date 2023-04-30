@@ -7,10 +7,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+//----------------------
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 //db context configrations
-builder.Services.AddDbContext<AppDbContext>(options => options
+builder.Services.AddDbContext<AppDbContext>();
+
+//builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer());
 //.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
-.UseSqlServer("Data Source =.; Integrated Security = True; Connect Timeout = 30; Encrypt = False; Trust Server Certificate=True; Application Intent = ReadWrite; Multi Subnet Failover=False"));
+//.UseSqlServer("Data Source =.; Integrated Security = True; Connect Timeout = 30; Encrypt = False; Trust Server Certificate=True; Application Intent = ReadWrite; Multi Subnet Failover=False"));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
