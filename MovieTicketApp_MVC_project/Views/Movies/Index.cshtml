@@ -1,0 +1,77 @@
+﻿@model IEnumerable<MovieTicketApp_MVC_project.Models.Movie>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<style>
+    body {
+        background-color: #f5f7fa;
+    }
+
+    .bi.bi-camera-reels:hover {
+        color: #f44336 !important;
+        
+    }
+
+    .bi.bi-bag-plus-alt:hover {
+        color: #0d47a1 !important;
+    }
+/*    #c{
+       color:aqua;
+    }*/
+    h5,p{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+    a{
+        text-decoration:none;
+    }
+
+/*    img{
+        height:100px;
+    }*/
+
+</style>
+
+<div class="row d-flex justify-content-between ">
+    @foreach (var item in Model)
+  {
+        <div class="card bg-black rounded my-2" style="width:28rem;height:38rem">
+      
+                <div class="my-2">
+                    <h5 class="card-title font-weight-bold text-info">
+                         <a asp-action="Edit" asp-route-id="@item.Id">
+                        <i class="bi bi-pen text-info my-1" title="Edit"></i>
+                    </a> @item.Name
+                </h5>
+                  
+                </div>
+
+
+            <img class="h-75" src="@item.ImageURL" alt="Card image cap" />
+
+
+           <div class="card-body">
+                @*---------------------------------------------------------*@
+                <p class="card-text text-light" id="c">@item.Description</p>
+                @*---------------------------------------------------------*@
+                <div class="d-flex justify-content-between">
+                    <a href="#" class="btn btn-link link-danger mr-5">Read more</a>
+                    <div>
+                        <i class="bi bi-bag-plus text-muted p-md-1 " data-mdb-toggle="tooltip"
+                           data-mdb-placement="top" title="Add to card"></i>
+                        <a asp-action="Details" asp-route-id="@item.Id">
+                            <i class="bi bi-camera-reels text-muted" data-mdb-toggle="tooltip" data-mdb-placement="top" title="Show details"></i>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+   
+</div>
+  }

@@ -11,11 +11,12 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 //db context configrations
-builder.Services.AddDbContext<AppDbContext>();
+builder.Services.AddDbContext<AppDbContext>(op => op.UseSqlServer(builder.Configuration.GetConnectionString("con1")));
+
+
 
 //builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer());
 //.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
-//.UseSqlServer("Data Source =.; Integrated Security = True; Connect Timeout = 30; Encrypt = False; Trust Server Certificate=True; Application Intent = ReadWrite; Multi Subnet Failover=False"));
 
 var app = builder.Build();
 
