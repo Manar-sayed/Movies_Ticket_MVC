@@ -1,0 +1,67 @@
+﻿@model MovieTicketApp_MVC_project.Data.ViewModels.LoginVM
+
+
+@{
+    ViewData["Title"] = "Log in to your account";
+}
+<style>
+    html,body {
+        background-image: url('https://www.syfy.com/sites/syfy/files/2022/05/avengers_movie_posters_ranked.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        opacity: 0.9;
+    }
+
+    .card {
+        top: 50%;
+        box-shadow: 0 0 5px 0;
+        background: inherit;
+        backdrop-filter: blur(10px);
+        margin: 100px;
+        text-align: center;
+        border-radius:20px;
+    }
+</style>
+<div class="card rounded-7 me-lg-n5">
+    
+    <div class="row text-light">
+        <div class="col-md-6 offset-3">
+            <p>
+                <h4>Log in to your account</h4>
+            </p>
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="col-md-12 alert alert-danger">
+                    <span><b>Sorry!</b> - @TempData["Error"] </span>
+                </div>
+            }
+
+            <div class="row text-light">
+                <div class="col-md-8 offset-2">
+                    <form asp-action="Login">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group">
+                            <label asp-for="EmailAddress" class="control-label"></label>
+                            <input asp-for="EmailAddress" class="form-control" />
+                            <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password" class="control-label"></label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group my-5">
+                            <input class="btn btn-outline-success float-right mx-3" type="submit" value="Log in" />
+                            <a class="btn btn-outline-secondary" asp-controller="Movies" asp-action="Index">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

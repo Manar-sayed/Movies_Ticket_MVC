@@ -3,25 +3,15 @@
 @{
     ViewData["Title"] = "Index";
 }
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 
 <style>
-    body {
-        background-color: #f5f7fa;
-    }
-
-    .bi.bi-camera-reels:hover {
+  /*  .bi.bi-x-octagon:hover {
         color: #f44336 !important;
         
     }
 
     .bi.bi-bag-plus-alt:hover {
         color: #0d47a1 !important;
-    }
-/*    #c{
-       color:aqua;
     }*/
     h5,p{
         white-space: nowrap;
@@ -31,22 +21,23 @@
     a{
         text-decoration:none;
     }
-
-/*    img{
-        height:100px;
-    }*/
+    #main{
+        width: 28rem;
+        height: 38rem;
+        box-shadow: 1px 4px 10px #4D4D4D;
+    }
 
 </style>
 
 <div class="row d-flex justify-content-between ">
     @foreach (var item in Model)
   {
-        <div class="card bg-black rounded my-2" style="width:28rem;height:38rem">
+        <div id="main" class="card bg-black rounded my-3">
       
                 <div class="my-2">
-                    <h5 class="card-title font-weight-bold text-info">
+                    <h5 class="card-title font-weight-bold text-warning mx-2">
                          <a asp-action="Edit" asp-route-id="@item.Id">
-                        <i class="bi bi-pen text-info my-1" title="Edit"></i>
+                        <i class="bi bi-pen text-warning my-1" title="Edit"></i>
                     </a> @item.Name
                 </h5>
                   
@@ -58,20 +49,28 @@
 
            <div class="card-body">
                 @*---------------------------------------------------------*@
-                <p class="card-text text-light" id="c">@item.Description</p>
+                <p class="card-text text-secondary" id="c">@item.Description</p>
                 @*---------------------------------------------------------*@
-                <div class="d-flex justify-content-between">
-                    <a href="#" class="btn btn-link link-danger mr-5">Read more</a>
-                    <div>
-                        <i class="bi bi-bag-plus text-muted p-md-1 " data-mdb-toggle="tooltip"
+                <div class="d-flex justify-content-end">
+                 <a href="#" class="btn btn-link text-muted mr-5 "></a>                    
+                        <a asp-controller="Orders" asp-action="AddItemToShoppingCart" asp-route-id="@item.Id">
+                            <i class="bi bi-bag-plus text-light mx-1" data-mdb-toggle="tooltip"
                            data-mdb-placement="top" title="Add to card"></i>
+                           </a>
                         <a asp-action="Details" asp-route-id="@item.Id">
-                            <i class="bi bi-camera-reels text-muted" data-mdb-toggle="tooltip" data-mdb-placement="top" title="Show details"></i>
+                        <i class="bi bi-three-dots-vertical text-light mx-1" data-mdb-toggle="tooltip" data-mdb-placement="top" title="Show details"></i>
+                        </a> 
+                        <a asp-action="Delete" asp-route-id="@item.Id">
+                            <i class="bi bi-x-octagon text-danger mx-1" data-mdb-toggle="tooltip" data-mdb-placement="top" title="Delete"></i>
                         </a>
 
-                    </div>
+                  
                 </div>
             </div>
    
 </div>
   }
+  </div>
+
+
+    @await Html.PartialAsync("_CreateItem","Movies");

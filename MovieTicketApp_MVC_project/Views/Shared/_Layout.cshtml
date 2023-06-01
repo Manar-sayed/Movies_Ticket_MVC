@@ -16,32 +16,75 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm  bg-black border-bottom box-shadow mb-3 text-light">
             <div class="container-fluid">
                 <a class="navbar-brand " asp-area="" asp-controller="Movies" asp-action="Index"><img src="~/Images/logo3.jpeg" width="90px" height="70px" style="border-radius:50%" /></a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+               
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1">  
+
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-controller="Movies" asp-action="Index"><i class="badge-info bi-film"></i> Movies</a>
                         </li>
+
+                        @*Dropdown*@
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
                         <li class="nav-item dropdown ">
                             <a class="nav-link dropdown-toggle text-light" href="#" role="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-gear"></i> Management
                             </a>
+                          
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" asp-controller="Cinemas" asp-action="Index"><i class="bi bi-camera-reels"></i> Cinema</a>
                                 <a class="dropdown-item" asp-controller="Producers" asp-action="Index"><i class="bi bi-headset"></i> Producers</a>
                                 <a class="dropdown-item" asp-controller="Actors" asp-action="Index"><i class="bi bi-person-square"></i> Actors</a>
                             </div>
                         </li>
+                        }
                     </ul>
-                 
+
+                      @*Search Btn*@
                         <form class="row" asp-controller="Movies" asp-action="Filter">
                             <input name="searchString" type="text" class="col-8 mx-2" placeholder="Search for a movie...">
                             <button class="btn btn-outline-warning col-2" type="submit"><i class="bi bi-search"></i></button>
                         </form>
-                  
+                        
+                        @*Cart Icon*@
+                        <ul class="navbar-nav">
+                           @await Component.InvokeAsync("ShoppingCartSummary")
+                        </ul>
+
+                       @* Login Icon
+                        <a class="btn btn-outline-success my-2 my-sm-0" asp-controller="Account" asp-action="Login">
+                            <i class="bi bi-box-arrow-in-right">Log in</i>
+                        </a> 
+                        Sign up Icon
+                        <a class="btn btn-outline-primary my-2 my-sm-0" asp-controller="Account" asp-action="Register">
+                            <i class="bi bi-box-person-plus">Sign up</i>
+                    </a>*@
+@*                            <li class="nav-item dropdown btn btn-outline-success">
+                        <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-badge"></i> Hello User
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="profile-btn">
+                                    <a class="dropdown-item" asp-controller="Orders" asp-action="Index"> 
+                                        <i class="bi bi-list"></i>Orders 
+                                        </a>
+                                 </div>
+                            </li>
+*@
+                    <partial name="_Identity.cshtml" />
+
+            @*      <span style="padding:5px"></span>
+                    <form asp-controller="Account" asp-action="Logout">
+                        <button class="btn btn-outline-danger my-2">
+                            <i class="bi bi-box-arrow-in-right"></i>Logout
+                        </button>
+                    </form>*@
+                    
                 </div>
             </div>
         </nav>
@@ -54,11 +97,11 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+@*    <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2023 - eTickets
         </div>
-    </footer>
+    </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

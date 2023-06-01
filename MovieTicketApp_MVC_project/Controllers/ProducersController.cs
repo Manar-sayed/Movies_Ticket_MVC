@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MovieTicketApp_MVC_project.Data;
+using MovieTicketApp_MVC_project.Data.Services;
 using MovieTicketApp_MVC_project.Models;
 
 namespace MovieTicketApp_MVC_project.Controllers
 {
     public class ProducersController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IProducersService _context;
 
-        public ProducersController(AppDbContext context)
+        public ProducersController(IProducersService context)
         {
             _context = context;
         }
@@ -22,19 +24,13 @@ namespace MovieTicketApp_MVC_project.Controllers
         // GET: Producers
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Producers.ToListAsync());
+              return View(await _context.GetAll());
         }
 
         // GET: Producers/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null || _context.Producers == null)
-            {
-                return NotFound();
-            }
-
-            var producer = await _context.Producers
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var producer = await _context.GetById(id);
             if (producer == null)
             {
                 return NotFound();
@@ -54,26 +50,20 @@ namespace MovieTicketApp_MVC_project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ProfilepictureURL,FullName,Bio")] Producer producer)
+        public async Task<IActionResult> Create([Bind("ProfilepictureURL,FullName,Bio")] Producer producer)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(producer);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(producer);
+            if (!ModelState.IsValid) return View(producer);
+           
+            await _context.Add(producer);
+            return RedirectToAction(nameof(Index));
+         
+            
         }
 
         // GET: Producers/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null || _context.Producers == null)
-            {
-                return NotFound();
-            }
-
-            var producer = await _context.Producers.FindAsync(id);
+            var producer = await _context.GetById(id);
             if (producer == null)
             {
                 return NotFound();
@@ -95,38 +85,17 @@ namespace MovieTicketApp_MVC_project.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(producer);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProducerExists(producer.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                await _context.Update(producer, id);
                 return RedirectToAction(nameof(Index));
             }
             return View(producer);
         }
 
         // GET: Producers/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null || _context.Producers == null)
-            {
-                return NotFound();
-            }
-
-            var producer = await _context.Producers
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (producer == null)
+            var producer =await _context.GetById(id);
+            if (id == null ||producer == null)
             {
                 return NotFound();
             }
@@ -139,23 +108,22 @@ namespace MovieTicketApp_MVC_project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Producers == null)
+            var actor = await _context.GetById(id);
+
+            if (actor == null)
             {
                 return Problem("Entity set 'AppDbContext.Producers'  is null.");
             }
-            var producer = await _context.Producers.FindAsync(id);
-            if (producer != null)
-            {
-                _context.Producers.Remove(producer);
-            }
-            
-            await _context.SaveChangesAsync();
+
+            await _context.Delete(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProducerExists(int id)
+        private Task<Producer> ProducerExists(int id)
         {
-          return _context.Producers.Any(e => e.Id == id);
+
+            //var producers = _context.GetAll();
+            return _context.GetById(id);
         }
     }
 }

@@ -4,12 +4,11 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
+@*<p>
     <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+</p>*@
+<table class="table text-light">
     <thead>
         <tr>
             <th>
@@ -45,3 +44,4 @@
 }
     </tbody>
 </table>
+@await Html.PartialAsync("_CreateItem","Producers");

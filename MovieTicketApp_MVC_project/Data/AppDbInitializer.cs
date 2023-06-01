@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using MovieTicketApp_MVC_project.Data.Enum;
+using MovieTicketApp_MVC_project.Data.Static;
 using MovieTicketApp_MVC_project.Models;
 
 namespace MovieTicketApp_MVC_project.Data
@@ -211,159 +212,159 @@ namespace MovieTicketApp_MVC_project.Data
                     context.SaveChanges();
                 }
                 //Actors & Movies
-                //if (!context.Actors_Movies.Any())
-                //{
-                //    context.Actors_Movies.AddRange(new List<Actor_Movie>()
-                //    {
-                //        new Actor_Movie()
-                //        {
-                //            ActorId = 1,
-                //            MovieId = 1
-                //        },
-                //        new Actor_Movie()
-                //        {
-                //            ActorId = 3,
-                //            MovieId = 1
-                //        },
+                if (!context.Actor_Movies.Any())
+                {
+                    context.Actor_Movies.AddRange(new List<Actor_Movie>()
+                    {
+                        new Actor_Movie()
+                        {
+                            ActorId = 1,
+                            MovieId = 1
+                        },
+                        new Actor_Movie()
+                        {
+                            ActorId = 3,
+                            MovieId = 1
+                        },
 
-                //         new Actor_Movie()
-                //        {
-                //            ActorId = 1,
-                //            MovieId = 2
-                //        },
-                //         new Actor_Movie()
-                //        {
-                //            ActorId = 4,
-                //            MovieId = 2
-                //        },
+                         new Actor_Movie()
+                        {
+                            ActorId = 1,
+                            MovieId = 2
+                        },
+                         new Actor_Movie()
+                        {
+                            ActorId = 4,
+                            MovieId = 2
+                        },
 
-                //        new Actor_Movie()
-                //        {
-                //            ActorId = 1,
-                //            MovieId = 3
-                //        },
-                //        new Actor_Movie()
-                //        {
-                //            ActorId = 2,
-                //            MovieId = 3
-                //        },
-                //        new Actor_Movie()
-                //        {
-                //            ActorId = 5,
-                //            MovieId = 3
-                //        },
-
-
-                //        new Actor_Movie()
-                //        {
-                //            ActorId = 2,
-                //            MovieId = 4
-                //        },
-                //        new Actor_Movie()
-                //        {
-                //            ActorId = 3,
-                //            MovieId = 4
-                //        },
-                //        new Actor_Movie()
-                //        {
-                //            ActorId = 4,
-                //            MovieId = 4
-                //        },
+                        new Actor_Movie()
+                        {
+                            ActorId = 1,
+                            MovieId = 3
+                        },
+                        new Actor_Movie()
+                        {
+                            ActorId = 2,
+                            MovieId = 3
+                        },
+                        new Actor_Movie()
+                        {
+                            ActorId = 5,
+                            MovieId = 3
+                        },
 
 
-                //        new Actor_Movie()
-                //        {
-                //            ActorId = 2,
-                //            MovieId = 5
-                //        },
-                //        new Actor_Movie()
-                //        {
-                //            ActorId = 3,
-                //            MovieId = 5
-                //        },
-                //        new Actor_Movie()
-                //        {
-                //            ActorId = 4,
-                //            MovieId = 5
-                //        },
-                //        new Actor_Movie()
-                //        {
-                //            ActorId = 5,
-                //            MovieId = 5
-                //        },
+                        new Actor_Movie()
+                        {
+                            ActorId = 2,
+                            MovieId = 4
+                        },
+                        new Actor_Movie()
+                        {
+                            ActorId = 3,
+                            MovieId = 4
+                        },
+                        new Actor_Movie()
+                        {
+                            ActorId = 4,
+                            MovieId = 4
+                        },
 
 
-                //        new Actor_Movie()
-                //        {
-                //            ActorId = 3,
-                //            MovieId = 6
-                //        },
-                //        new Actor_Movie()
-                //        {
-                //            ActorId = 4,
-                //            MovieId = 6
-                //        },
-                //        new Actor_Movie()
-                //        {
-                //            ActorId = 5,
-                //            MovieId = 6
-                //        },
-                //    });
-                //    context.SaveChanges();
-                //}
+                        new Actor_Movie()
+                        {
+                            ActorId = 2,
+                            MovieId = 5
+                        },
+                        new Actor_Movie()
+                        {
+                            ActorId = 3,
+                            MovieId = 5
+                        },
+                        new Actor_Movie()
+                        {
+                            ActorId = 4,
+                            MovieId = 5
+                        },
+                        new Actor_Movie()
+                        {
+                            ActorId = 5,
+                            MovieId = 5
+                        },
+
+
+                        new Actor_Movie()
+                        {
+                            ActorId = 3,
+                            MovieId = 6
+                        },
+                        new Actor_Movie()
+                        {
+                            ActorId = 4,
+                            MovieId = 6
+                        },
+                        new Actor_Movie()
+                        {
+                            ActorId = 5,
+                            MovieId = 6
+                        },
+                    });
+                    context.SaveChanges();
+                }
             }
 
         }
 
         public static async Task SeedUsersAndRolesAsync(IApplicationBuilder applicationBuilder)
         {
-            //using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
-            //{
+            using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+            {
 
-            //    //Roles
-            //    var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                //Roles
+                var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            //    if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
-            //        await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
-            //    if (!await roleManager.RoleExistsAsync(UserRoles.User))
-            //        await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+                if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+                if (!await roleManager.RoleExistsAsync(UserRoles.User))
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
 
-            //    //Users
-            //    var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-            //    string adminUserEmail = "admin@etickets.com";
+                //Users
+                var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+                string adminUserEmail = "admin1@gmail.com";
 
-            //    var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
-            //    if (adminUser == null)
-            //    {
-            //        var newAdminUser = new ApplicationUser()
-            //        {
-            //            FullName = "Admin User",
-            //            UserName = "admin-user",
-            //            Email = adminUserEmail,
-            //            EmailConfirmed = true
-            //        };
-            //        await userManager.CreateAsync(newAdminUser, "Coding@1234?");
-            //        await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
-            //    }
+                var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
+                if (adminUser == null)
+                {
+                    var newAdminUser = new ApplicationUser()
+                    {
+                        FullName = "Admin User",
+                        UserName = "admin-user",
+                        Email = adminUserEmail,
+                        EmailConfirmed = true
+                    };
+                    await userManager.CreateAsync(newAdminUser, "Coding@1234?");
+                    await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
+                }
 
 
-            //    string appUserEmail = "user@etickets.com";
+                string appUserEmail = "user@gmail.com";
 
-            //    var appUser = await userManager.FindByEmailAsync(appUserEmail);
-            //    if (appUser == null)
-            //    {
-            //        var newAppUser = new ApplicationUser()
-            //        {
-            //            FullName = "Application User",
-            //            UserName = "app-user",
-            //            Email = appUserEmail,
-            //            EmailConfirmed = true
-            //        };
-            //        await userManager.CreateAsync(newAppUser, "Coding@1234?");
-            //        await userManager.AddToRoleAsync(newAppUser, UserRoles.User);
-            //    }
+                var appUser = await userManager.FindByEmailAsync(appUserEmail);
+                if (appUser == null)
+                {
+                    var newAppUser = new ApplicationUser()
+                    {
+                        FullName = "Application User",
+                        UserName = "app-user",
+                        Email = appUserEmail,
+                        EmailConfirmed = true
+                    };
+                    await userManager.CreateAsync(newAppUser, "Coding@1234?");
+                    await userManager.AddToRoleAsync(newAppUser, UserRoles.User);
+                }
 
-            //}
+            }
         }
     }
 }

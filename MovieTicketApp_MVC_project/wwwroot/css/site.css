@@ -15,15 +15,17 @@ body {
     margin-bottom: 60px;
     font-family: Adamina;
     font-size: 14px;
+    background-color:black;
 }
 
 html {
     background-color: #fefefe;
     box-sizing: border-box;
-/*    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif font-size: 14px;
-*/    font-weight: 400;
-
+    /*    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif font-size: 14px;
+*/ font-weight: 400;
+    background-color: black;
 }
+
 
 /**, *:before, *:after {
     box-sizing: inherit;

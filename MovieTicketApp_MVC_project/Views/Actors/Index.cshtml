@@ -3,9 +3,9 @@
 @{
     ViewData["Title"] = "Index";
 }
-<p>
+@*<p>
     <a asp-action="Create">Create New</a>
-</p>
+</p>*@
 @*<table class="table">
     <thead>
         <tr>
@@ -45,11 +45,15 @@
 *@
 
 @*<div class="container mx-auto mt-4">*@
-<div class="row d-flex justify-content-between">
+   
+<html class="bg-black">
+    
+    <body class="bg-black">
+<div class="row d-flex justify-content-between ">
         @foreach (var item in Model) {
         @*<div class="col-md-4 bg-dark ">*@
-        <div class="card bg-dark rounded border border-info border border-3" style="width:22rem;height:30rem">
-                    <img src="@item.ProfilepictureURL" class="card-img-top h-50" alt="..." >
+        <div id="main" class="card bg-dark rounded my-3" style="width:22rem;height:30rem">
+                    <img src="@item.ProfilepictureURL" class="card-img-top h-50 rounded" alt="..." >
                 <div class="card-body ">
                     <div>
                     <h5 class="card-title text-light">
@@ -59,15 +63,15 @@
                 <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
                 <div style="height:40px; -webkit-line-clamp:3;" class="my-3">
 
-                    <p class="card-text text-light">
+                        <p class="card-text text-light" style="text-overflow:ellipsis;overflow: hidden;white-space: nowrap;">
                             @Html.DisplayFor(modelItem => item.Bio)
                     </p>
                 </div>
 
                 <div class="my-4">
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-info mx-2">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info mx-2">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-info mx-2">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning mx-2">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-warning mx-2">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-warning mx-2">Delete</a>
                 </div>
              @*       <a href="#" class="btn btn-primary mr-2"><i class="fas fa-link"></i> Visit Site</a>
                     <a href="#" class="btn btn-primary"><i class="fab fa-github"></i> Github</a>*@
@@ -77,3 +81,12 @@
         }
     </div>
 @*</div>*@
+@await Html.PartialAsync("_CreateItem","Actors");
+<style>
+        #main:hover{
+            box-shadow: 2px 2px 10px 1px #9E6F21;
+        }
+</style>
+</body>
+
+</html>

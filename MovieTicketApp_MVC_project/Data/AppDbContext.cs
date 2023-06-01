@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MovieTicketApp_MVC_project.Models;
 
 namespace MovieTicketApp_MVC_project.Data
 {
-    public class AppDbContext:DbContext
+    public class AppDbContext:IdentityDbContext<ApplicationUser>
     {
         public AppDbContext(DbContextOptions options):base(options)
         {
@@ -34,9 +35,11 @@ namespace MovieTicketApp_MVC_project.Data
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Actor> Actors { get; set; }
+        
         public DbSet<Cinema> Cinemas{ get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Producer> Producers { get; set; }
+        public DbSet<Actor_Movie> Actor_Movies { get; set; }
 
         //Orders related tables
         public DbSet<Order> Orders { get; set; }

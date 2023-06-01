@@ -4,101 +4,57 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>@Model.FullName</h1>
-@*
-<div>
-    <h4>Actor</h4>
-    <hr />
-    <dl class="row">
-   
 
-     
-        <dt class="col-sm-2">
-           Image
-        </dt>
-        <dd class="col-sm-10">
-            <img src="@Model.ProfilepictureURL" alt="Image description">
-        </dd>
-
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FullName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FullName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Bio)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Bio)
-        </dd>
-    </dl>
-</div>*@
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
-@*
-    ----------------------------------
-*@
-
-<div class="container1">
-    <div class="header-container">
-        <div class="header" >
-
-            <h1 class="main-heading">Hugh Jackman</h1>
-            <span class="tag">Actor</span>
-            <span class="tag">Producer</span>
-            <div class="stats">
-                <span class="stat-module">
-                    Movies <span class="stat-number">56</span>
-                </span>
-                <span class="stat-module">
-                    Plays <span class="stat-number">29</span>
-                </span>
-                <span class="stat-module">
-                    Musicals <span class="stat-number">11</span>
-                </span>
+<div class="col-md-8 col-xs-6 " id="main">
+    <div class="card mb-5 bg-black text-light">
+        <div class="row g-0">
+@*            <div class="col-md-12">
+                <div class="card-header text-white bg-info">
+                    <p class="card-text">
+                        <h5 class="card-title">
+                            @Model.FullName
+                               @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                            {
+                            <a class="text-white float-right" asp-action="Edit" asp-route-id="@Model.Id"><i class="bi bi-pencil-square"></i></a>
+                            }
+                        </h5>
+                    </p>
+                </div>
             </div>
-        </div> <!-- END header -->
-    </div>
-  
-    <div class="overlay-header"></div>
-    <div class="body">
-        <img src="@Model.ProfilepictureURL" alt="Hugh Jackman" class="body-image" />
-        <div class="body-action-button u-flex-center">
-            <svg fill="#ffffff" height="28" viewBox="0 0 24 24" width="28" xmlns="http://www.w3.org/2000/svg">
-                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-                <path d="M0 0h24v24H0z" fill="none" />
-            </svg>
-        </div>
-        <span class="body-stats">Followers <span>3.5k</span></span>
-        <span class="body-stats">Following <span>1.9k</span></span>
-        <div class="u-clearfix"></div>
-        <div class="body-info">
-            <p>
-                @Html.DisplayNameFor(model => model.Bio)
-            </p>
+*@            <div class="col-md-7 rounded">
+                <img src="@Model.ProfilepictureURL" style="width:90%" alt="@Model.FullName">
+            </div>
+            <div class="col-md-4 ">
+                <div class="card-body">
+                    @*<p class="card-text"><b>Cinema: </b></p>           ----------عشان اعرض صور الافلام بتاعته *@
+                    <p class="card-text"><b>FullName: </b>@Model.FullName</p>
+                    <p class="card-text"><b>About : </b>@Model.Bio</p>
+                    <p class="card-text ">
+                     
+                    </p>
+
+                </div>
+            </div>
+
 
         </div>
-@*        <div class="body-more">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>*@
-        <div class="card u-clearfix">
-            <span class="card-heading">Movies</span>
-            <span class="card-more">
-                <svg fill="#777777" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 0h24v24H0z" fill="none" />
-                    <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
-                </svg>
-            </span>
-            <ul class="card-list">
-                <li><img src="https://s12.postimg.cc/c0ryp65lp/m1f.jpg" alt="" /></li>
-                <li><img src="https://s14.postimg.cc/6ts0it3xt/m2f.jpg" alt="" /></li>
-                <li><img src="https://s13.postimg.cc/ri499o2zr/m3f.jpg" alt="" /></li>
-            </ul>
-        </div>
     </div>
+</div>
 
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="text-warning text-decoration-none">Edit</a> |
+    <a asp-action="Index" class="text-warning text-decoration-none">Back to List</a>
+</div>
+
+<style>
+    #main{
+        margin-top:2%;
+        margin-left:30%;
+        height:40%;
+        width:50%;
+        border: solid #FFD93D 1px;
+        border-radius:7px;
+     
+    }
+</style>

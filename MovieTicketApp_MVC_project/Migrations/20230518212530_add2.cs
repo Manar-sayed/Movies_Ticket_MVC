@@ -5,7 +5,7 @@
 namespace MovieTicketApp_MVC_project.Migrations
 {
     /// <inheritdoc />
-    public partial class first2 : Migration
+    public partial class add2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -1,0 +1,91 @@
+﻿@model MovieTicketApp_MVC_project.Data.ViewModels.ShoppingCartVM
+
+
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+    h2 {
+        font-family: 'Lobster', cursive;
+        /*  font-size: 3em;
+    */ margin-bottom: 40px;
+        margin-Top: 10px;
+        white-space: nowrap;
+        padding: 10px;
+        overflow: hidden;
+        width: 100%;
+        animation: animtext 4s steps(80, end);
+        transition: all cubic-bezier(0.1, 0.7, 1.0, 0.1);
+    }
+
+    @@keyframes animtext {
+        from {
+            width: 0;
+            transition: all 2s ease-in-out;
+        }
+    }
+</style>
+<div class="row text-light">
+    <div class="col-md-8 offset-2">
+        <div class="text-center text-warning">
+            <h2>You shopping cart summary</h2>
+        </div>
+
+        <table class="table">
+            <thead class="text-warning">
+                <tr>
+                    <th>Selected amount</th>
+                    <th>Movie</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="text-light">
+                @foreach (var item in Model.ShoppingCart.ShoppingCartItems)
+                {
+                    <tr>
+                        <td class="align-middle">@item.Amount</td>
+                        <td class="align-middle">@item.Movie.Name</td>
+                        <td class="align-middle text-Info">@item.Movie.Price.ToString("c")</td>
+                        <td class="align-middle text-Info">@((item.Amount * item.Movie.Price).ToString("c"))</td>
+                        <td class="align-middle">
+                            <a class="text-danger" asp-controller="Orders" asp-action="RemoveItemFromShoppingCart"
+                           asp-route-id="@item.Movie.Id">
+                                <i class="bi bi-cart-dash"></i>
+                            </a>
+                            |
+                            <a class="text-success" asp-controller="Orders" asp-action="AddItemToShoppingCart"
+                           asp-route-id="@item.Movie.Id">
+                                <i class="bi bi-cart-plus"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr class="text-danger">
+                    <td colspan="2"></td>
+                    <td><b>Total:</b></td>
+                    <td>
+                        @Model.ShoppingCartTotal.ToString()
+                    </td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="text-right">
+            <div class="btn-group">
+                <a class="btn btn-outline-primary" asp-action="CompleteOrder">
+                Complete order
+                </a>
+                <div id="paypal-btn"></div>
+                <span style="padding:5px"></span>
+                <a class="btn btn-outline-success" asp-controller="Movies" asp-action="Index">
+                    Add more items
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
